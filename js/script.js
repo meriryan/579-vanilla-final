@@ -1,27 +1,23 @@
-const addNumbers = (first, second) => {
-  return first + second;
-}
+const foods = ["🍔", "🌮", "🍕", "🍿", "🍟"];
+const leftSide = document.getElementById("left-side");
+const rightSide = document.getElementById("right-side");
+const moveBtn = document.getElementById("move-btn");
 
-if (typeof module !== 'undefined') {
-  module.exports = {
-    addNumbers
+// Populate left side on load
+foods.forEach(food => {
+  const circle = document.createElement("div");
+  circle.classList.add("food-circle");
+  circle.textContent = food;
+  leftSide.appendChild(circle);
+});
+
+moveBtn.addEventListener("click", () => {
+  const firstItem = leftSide.querySelector(".food-circle");
+  if (firstItem) {
+    leftSide.removeChild(firstItem);
+    rightSide.appendChild(firstItem);
+  } else {
+    moveBtn.textContent = "All done!";
+    moveBtn.disabled = true;
   }
-}
-
-let count = 0;
-const countDisplay = document.getElementById("count");
-
-document.getElementById("increment").addEventListener("click", () => {
-  count++;
-  countDisplay.textContent = count;
-});
-
-document.getElementById("decrement").addEventListener("click", () => {
-  count--;
-  countDisplay.textContent = count;
-});
-
-document.getElementById("reset").addEventListener("click", () => {
-  count = 0;
-  countDisplay.textContent = count;
 });
